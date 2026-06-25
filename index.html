@@ -152,21 +152,33 @@ h1 { font-size: 26px; font-weight: 600; color: #0f1111; margin-bottom: 4px; }
   <div class="modal">
     <div class="modal-header"><h4>Professional Installation</h4></div>
     <div class="modal-body">
-      <label>1. Do you have an existing junction box?</label>
-      <div class="modal-opts" id="junctionQ">
-        <button class="modal-opt" onclick="sel(this)">Yes</button>
-        <button class="modal-opt" onclick="sel(this)">No</button>
+      <h3 style="font-size:22px; font-weight:600; margin-bottom:16px;">How it works</h3>
+      <ol style="padding-left:20px; margin-bottom:24px; font-size:14px; line-height:1.8; color:#333;">
+        <li>Confirm your location below and click "Add Professional Installation".</li>
+        <li>After you complete your purchase, you'll receive an email with a link to schedule your installation when your device ships.</li>
+        <li>A certified technician will come set up and install your device.</li>
+      </ol>
+
+      <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px;">ZIP code</label>
+      <input type="text" value="98004" style="width:100%; padding:14px; border:2px solid #1C4B82; border-radius:8px; font-size:15px; margin-bottom:16px; font-family:inherit;">
+
+      <div style="background:#e8f5e9; border-radius:8px; padding:14px; margin-bottom:24px;">
+        <p style="color:#2e7d32; font-size:14px; font-weight:600; margin:0;">Professional installation is available in your area.</p>
       </div>
-      <label>2. Is the install location below 12 feet?</label>
-      <div class="modal-opts" id="heightQ">
-        <button class="modal-opt" onclick="sel(this)">Yes</button>
-        <button class="modal-opt" onclick="sel(this)">No</button>
-      </div>
-      <div id="modalMsg"></div>
+
+      <h4 style="font-size:15px; font-weight:600; margin-bottom:12px;">What's included in your service:</h4>
+      <ul style="padding-left:20px; margin-bottom:20px; font-size:14px; line-height:1.8; color:#333;">
+        <li><strong>Professional mounting and wiring</strong> of your new devices (one installation covers one device)</li>
+        <li><strong>Complete removal</strong> — unwiring and dismounting of your existing device</li>
+        <li><strong>Device configuration</strong> — WiFi, Ring app, and smart home integration</li>
+        <li><strong>Hands-on training</strong> for your device and mobile app features</li>
+      </ul>
+
+      <p style="font-size:12px; color:#565959; line-height:1.5;">Modifications and extensions to existing wiring available at additional cost (billed separately). Extension available only for low-voltage wiring (PoE or Plug-in USB-C).</p>
     </div>
     <div class="modal-footer">
       <button class="btn-back" onclick="closeModal()">Back</button>
-      <button class="btn-check" onclick="checkEligibility()">Check Eligibility</button>
+      <button class="btn-check" onclick="closeModal()">Add Professional Installation</button>
     </div>
   </div>
 </div>
