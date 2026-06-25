@@ -177,14 +177,7 @@ function selColor(el){document.querySelectorAll('.swatch').forEach(function(s){s
 function selQty(el){document.querySelectorAll('.qty-pill').forEach(function(q){q.classList.remove('selected');});el.classList.add('selected');}
 function sel(btn){btn.parentElement.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});btn.classList.add('selected');}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.getElementById('modalMsg').innerHTML='';document.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});}
-function checkEligibility(){
-  var j=document.querySelector('#junctionQ .modal-opt.selected');
-  var h=document.querySelector('#heightQ .modal-opt.selected');
-  if(!j||!h){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">Please answer both questions.</div>';return;}
-  if(j.textContent==='No'){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">⚠️ An existing junction box is required. You will need to hire a licensed electrician to install a junction box before scheduling professional installation.</div>';}
-  else if(h.textContent==='No'){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-error">Installation locations above 12 feet are not supported. Returning to product page...</div>';setTimeout(closeModal,2000);}
-  else{document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-success">✓ You are eligible for professional installation! Installation has been added to your cart.</div>';}
-}
+function checkEligibility(){closeModal();}
 document.getElementById('openModal').addEventListener('click',function(e){e.preventDefault();document.getElementById('modalOverlay').classList.add('active');});
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 document.querySelectorAll('.gallery-thumb').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(function(x){x.classList.remove('active');});t.classList.add('active');document.getElementById('mainImage').src=t.querySelector('img').src;});});
