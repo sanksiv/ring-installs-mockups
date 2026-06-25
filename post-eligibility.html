@@ -128,7 +128,7 @@ h1 { font-size: 26px; font-weight: 600; color: #0f1111; margin-bottom: 4px; }
       <a href="#">Change location</a>
     </div>
 
-    <div class="install-eligible">
+    <div class="install-eligible" id="installBox" style="cursor:pointer;" onclick="toggleInstall()">
       <div class="install-eligible-text">
         <div class="install-eligible-check">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="4" fill="#1C4B82"/><path d="M10 15.5L7 12.5L8.41 11.09L10 12.67L15.59 7.09L17 8.5L10 15.5Z" fill="white"/></svg>
@@ -148,6 +148,24 @@ h1 { font-size: 26px; font-weight: 600; color: #0f1111; margin-bottom: 4px; }
 </div>
 
 <script>
+var installSelected = true;
+function toggleInstall() {
+  installSelected = !installSelected;
+  var box = document.getElementById('installBox');
+  var svg = box.querySelector('svg rect');
+  var check = box.querySelector('svg path');
+  if (installSelected) {
+    svg.setAttribute('fill', '#1C4B82');
+    check.setAttribute('fill', 'white');
+    box.style.background = '#EBF4FA';
+  } else {
+    svg.setAttribute('fill', '#fff');
+    svg.setAttribute('stroke', '#d5d9d9');
+    svg.setAttribute('stroke-width', '2');
+    check.setAttribute('fill', 'none');
+    box.style.background = '#f9f9f9';
+  }
+}
 document.querySelectorAll('.gallery-thumb').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(function(x){x.classList.remove('active');});t.classList.add('active');document.getElementById('mainImage').src=t.querySelector('img').src;});});
 document.querySelectorAll('.power-pill').forEach(function(p){p.addEventListener('click',function(){document.querySelectorAll('.power-pill').forEach(function(x){x.classList.remove('selected');});p.classList.add('selected');});});
 document.querySelectorAll('.swatch').forEach(function(s){s.addEventListener('click',function(){document.querySelectorAll('.swatch').forEach(function(x){x.classList.remove('selected');});s.classList.add('selected');});});
