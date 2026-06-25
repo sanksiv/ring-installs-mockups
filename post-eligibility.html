@@ -149,6 +149,9 @@ h1 { font-size: 26px; font-weight: 600; color: #0f1111; margin-bottom: 4px; }
 
 <script>
 document.querySelectorAll('.gallery-thumb').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(function(x){x.classList.remove('active');});t.classList.add('active');document.getElementById('mainImage').src=t.querySelector('img').src;});});
+document.querySelectorAll('.power-pill').forEach(function(p){p.addEventListener('click',function(){document.querySelectorAll('.power-pill').forEach(function(x){x.classList.remove('selected');});p.classList.add('selected');});});
+document.querySelectorAll('.swatch').forEach(function(s){s.addEventListener('click',function(){document.querySelectorAll('.swatch').forEach(function(x){x.classList.remove('selected');});s.classList.add('selected');});});
+document.querySelectorAll('.qty-pill').forEach(function(q){q.addEventListener('click',function(){document.querySelectorAll('.qty-pill').forEach(function(x){x.classList.remove('selected');});q.classList.add('selected');});});
 </script>
 </body>
 </html>
