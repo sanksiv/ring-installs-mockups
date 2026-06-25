@@ -3,20 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ring PDP Mockup - Outdoor Cam Pro 4K - Install Widget</title>
+<title>Outdoor Cam Pro (4K) | Ring</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fff; padding: 20px; }
-.mockup { max-width: 520px; margin: 0 auto; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fff; }
+
+/* Layout */
+.pdp { display: flex; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 40px; }
+.pdp-gallery { flex: 1; position: sticky; top: 20px; align-self: flex-start; }
+.pdp-info { width: 420px; flex-shrink: 0; }
+
+/* Gallery */
+.gallery-thumbs { display: flex; flex-direction: column; gap: 8px; position: absolute; left: 0; top: 0; }
+.gallery-thumb { width: 64px; height: 64px; border: 2px solid transparent; border-radius: 8px; overflow: hidden; cursor: pointer; }
+.gallery-thumb.active { border-color: #1C4B82; }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-main { margin-left: 80px; }
+.gallery-main img { width: 100%; max-width: 500px; border-radius: 8px; }
+
+/* Product Info */
+.badges { display: flex; gap: 8px; margin-bottom: 10px; }
+.badge { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; }
+.badge-new { background: #e3f2fd; color: #1565c0; }
+h1 { font-size: 26px; font-weight: 600; color: #0f1111; margin-bottom: 4px; }
+.subtitle { font-size: 14px; color: #565959; margin-bottom: 8px; }
+.rating { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+.stars { color: #de7921; font-size: 16px; }
+.rating-count { font-size: 14px; color: #007185; }
+.price { font-size: 28px; font-weight: 700; color: #0f1111; margin-bottom: 16px; }
 
 .section-label { font-size: 13px; color: #333; font-weight: 500; margin-bottom: 10px; }
-.power-pills { display: flex; gap: 8px; margin-bottom: 24px; }
-.power-pill { padding: 14px 20px; border: 2px solid #d5d9d9; border-radius: 10px; font-size: 14px; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
+.color-swatches { display: flex; gap: 10px; margin-bottom: 20px; }
+.swatch { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #d5d9d9; cursor: pointer; }
+.swatch.selected { border-color: #1C4B82; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1C4B82; }
+.swatch-white { background: #fff; }
+.swatch-black { background: #1a1a1a; }
+
+.power-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.power-pill { padding: 12px 18px; border: 2px solid #d5d9d9; border-radius: 10px; font-size: 14px; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
 .power-pill:hover { border-color: #007185; }
 .power-pill.selected { border-color: #1C4B82; background: #e7f4f5; }
 
-.delivery-row { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: #f5f5f5; border-radius: 10px; margin-bottom: 24px; font-size: 14px; color: #333; }
+.qty-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+.qty-pill { padding: 12px; border: 2px solid #d5d9d9; border-radius: 10px; font-size: 14px; cursor: pointer; background: #fff; text-align: center; font-family: inherit; }
+.qty-pill.selected { border-color: #1C4B82; background: #e7f4f5; }
+
+.delivery-row { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: #f5f5f5; border-radius: 10px; margin-bottom: 20px; font-size: 14px; color: #333; }
 .delivery-row a { color: #007185; text-decoration: none; font-weight: 600; }
 
 .install-widget { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid #d5d9d9; border-radius: 10px; margin-bottom: 16px; }
@@ -26,7 +59,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 
 .atc-btn { width: 100%; padding: 16px; font-size: 16px; font-weight: 600; background: #0f1111; color: #fff; border: none; border-radius: 24px; cursor: pointer; margin-bottom: 16px; font-family: inherit; }
 .atc-btn:hover { background: #1a1a2e; }
-
 .promo { color: #cc0c39; font-size: 13px; font-weight: 600; }
 
 /* Modal */
@@ -44,33 +76,75 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .modal-footer { display:flex; gap:12px; padding:16px 24px; border-top:1px solid #e8e8e8; }
 .modal-footer button { flex:1; padding:14px; border-radius:24px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; }
 .btn-back { border:2px solid #0f1111; background:#fff; color:#0f1111; }
-.btn-back:hover { background:#f5f5f5; }
 .btn-check { border:none; background:#0f1111; color:#fff; }
-.btn-check:hover { background:#333; }
 .modal-msg { margin-top:16px; padding:14px; border-radius:8px; font-size:14px; font-weight:500; line-height:1.5; }
 .msg-warn { background:#fff3e0; color:#e65100; }
 .msg-error { background:#fce4ec; color:#c62828; }
 .msg-success { background:#e8f5e9; color:#2e7d32; }
+
+@media (max-width: 768px) {
+  .pdp { flex-direction: column; gap: 20px; }
+  .pdp-info { width: 100%; }
+  .gallery-thumbs { flex-direction: row; position: static; margin-bottom: 12px; }
+  .gallery-main { margin-left: 0; }
+}
 </style>
 </head>
 <body>
-<div class="mockup">
-  <p class="section-label">Camera power type</p>
-  <div class="power-pills">
-    <div class="power-pill selected" onclick="selectPower(this)">Plug-In</div>
-    <div class="power-pill" onclick="selectPower(this)">Wired</div>
-    <div class="power-pill" onclick="selectPower(this)">Power over Ethernet</div>
+<div class="pdp">
+  <!-- Gallery -->
+  <div class="pdp-gallery">
+    <div class="gallery-thumbs">
+      <div class="gallery-thumb active"><img src="https://images.ctfassets.net/a3peezndovsu/6wwLqIyDCqMqfBswsDrK0F/931f7a682423a541fdfb751066d5e812/ring_outdoor_cam_pro_mounted_white_1500x1500.jpg" alt=""></div>
+      <div class="gallery-thumb"><img src="https://images.ctfassets.net/a3peezndovsu/5KYcHrqrm9cFOwT6Fkm819/2350ba0217446b2151cdf46427406820/ring_outdoor_cam_weather_1500x1500.jpg" alt=""></div>
+      <div class="gallery-thumb"><img src="https://images.ctfassets.net/a3peezndovsu/40sis66XNQlBxpuCRyEFDm/5f0026538fbe16728662784b0c973e88/ring_outdoor_cam_business_1500x1500.jpg" alt=""></div>
+    </div>
+    <div class="gallery-main">
+      <img id="mainImage" src="https://images.ctfassets.net/a3peezndovsu/6wwLqIyDCqMqfBswsDrK0F/931f7a682423a541fdfb751066d5e812/ring_outdoor_cam_pro_mounted_white_1500x1500.jpg" alt="Outdoor Cam Pro 4K">
+    </div>
   </div>
 
-  <div class="delivery-row">🚚 Add <a href="#">ZIP code</a> for delivery options</div>
+  <!-- Product Info -->
+  <div class="pdp-info">
+    <div class="badges"><span class="badge badge-new">New</span></div>
+    <h1>Outdoor Cam Pro</h1>
+    <p class="subtitle">Featuring Retinal 4K</p>
+    <div class="rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-count">4.8 (2,341)</span>
+    </div>
+    <div class="price">$199.99</div>
 
-  <div class="install-widget" id="installWidget">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3zm5 15h-2v-5H9v5H7v-7.19l5-4.5 5 4.5V18z"/></svg>
-    <a id="openModal">Book your device installation from $129.00!</a>
+    <p class="section-label">Color: White</p>
+    <div class="color-swatches">
+      <div class="swatch swatch-white selected" onclick="selColor(this)"></div>
+      <div class="swatch swatch-black" onclick="selColor(this)"></div>
+    </div>
+
+    <p class="section-label">Camera power type</p>
+    <div class="power-pills">
+      <div class="power-pill selected" onclick="selectPower(this)">Plug-In</div>
+      <div class="power-pill" onclick="selectPower(this)">Wired</div>
+      <div class="power-pill" onclick="selectPower(this)">Power over Ethernet</div>
+    </div>
+
+    <p class="section-label">Quantity</p>
+    <div class="qty-pills">
+      <div class="qty-pill selected" onclick="selQty(this)">1-pack</div>
+      <div class="qty-pill" onclick="selQty(this)">2-pack</div>
+      <div class="qty-pill" onclick="selQty(this)">3-pack</div>
+    </div>
+
+    <div class="delivery-row">🚚 Add <a href="#">ZIP code</a> for delivery options</div>
+
+    <div class="install-widget">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3zm5 15h-2v-5H9v5H7v-7.19l5-4.5 5 4.5V18z"/></svg>
+      <a id="openModal">Book your device installation from $129.00!</a>
+    </div>
+
+    <button class="atc-btn">Add to Cart</button>
+    <p class="promo">Offer ends on 6/26 at 9 PM PST.</p>
   </div>
-
-  <button class="atc-btn">Add to Cart</button>
-  <p class="promo">Offer ends on 6/26 at 9 PM PST.</p>
 </div>
 
 <!-- Modal -->
@@ -98,34 +172,22 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 </div>
 
 <script>
-function selectPower(el) {
-  document.querySelectorAll('.power-pill').forEach(function(p){p.classList.remove('selected');});
-  el.classList.add('selected');
-}
-function sel(btn) {
-  btn.parentElement.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});
-  btn.classList.add('selected');
-}
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('active');
-  document.getElementById('modalMsg').innerHTML='';
-  document.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});
-}
-function checkEligibility() {
-  var j = document.querySelector('#junctionQ .modal-opt.selected');
-  var h = document.querySelector('#heightQ .modal-opt.selected');
-  if (!j || !h) { document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">Please answer both questions.</div>'; return; }
-  if (j.textContent === 'No') {
-    document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">⚠️ An existing junction box is required. You will need to hire a licensed electrician to install a junction box before scheduling professional installation.</div>';
-  } else if (h.textContent === 'No') {
-    document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-error">Installation locations above 12 feet are not supported. Returning to product page...</div>';
-    setTimeout(closeModal, 2000);
-  } else {
-    document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-success">✓ You are eligible for professional installation! Installation has been added to your cart.</div>';
-  }
+function selectPower(el){document.querySelectorAll('.power-pill').forEach(function(p){p.classList.remove('selected');});el.classList.add('selected');}
+function selColor(el){document.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('selected');});el.classList.add('selected');}
+function selQty(el){document.querySelectorAll('.qty-pill').forEach(function(q){q.classList.remove('selected');});el.classList.add('selected');}
+function sel(btn){btn.parentElement.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});btn.classList.add('selected');}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.getElementById('modalMsg').innerHTML='';document.querySelectorAll('.modal-opt').forEach(function(b){b.classList.remove('selected');});}
+function checkEligibility(){
+  var j=document.querySelector('#junctionQ .modal-opt.selected');
+  var h=document.querySelector('#heightQ .modal-opt.selected');
+  if(!j||!h){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">Please answer both questions.</div>';return;}
+  if(j.textContent==='No'){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-warn">⚠️ An existing junction box is required. You will need to hire a licensed electrician to install a junction box before scheduling professional installation.</div>';}
+  else if(h.textContent==='No'){document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-error">Installation locations above 12 feet are not supported. Returning to product page...</div>';setTimeout(closeModal,2000);}
+  else{document.getElementById('modalMsg').innerHTML='<div class="modal-msg msg-success">✓ You are eligible for professional installation! Installation has been added to your cart.</div>';}
 }
 document.getElementById('openModal').addEventListener('click',function(e){e.preventDefault();document.getElementById('modalOverlay').classList.add('active');});
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.querySelectorAll('.gallery-thumb').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(function(x){x.classList.remove('active');});t.classList.add('active');document.getElementById('mainImage').src=t.querySelector('img').src;});});
 </script>
 </body>
 </html>
